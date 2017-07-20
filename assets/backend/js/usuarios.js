@@ -142,14 +142,11 @@ function Validarform() {
 					
 				}
 			}
-			
-
 			if (data['succes'] == "OK") {
-				 $("#msg-error").html('Operacion Realizada con exito').fadeIn(1000);
+				$('#mymodal').modal('hide');
+				$("#msg-error").html('Operacion Realizada con exito').fadeIn(1000);
 				setTimeout(function(){  $(location).attr('href',base_url+'bo/user/'); }, 3000);
 				
-			}else{
-				$("#msg-error").html('Operacion fallida').fadeIn(1000).delay(2000).fadeOut();
 			}
 		}
 	})

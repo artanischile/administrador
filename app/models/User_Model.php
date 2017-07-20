@@ -15,22 +15,18 @@ class User_Model extends CI_Model{
     }   
     
    public function GetAll($params = array()){
-        $this->db
-        ->select('user.*,profile.*')
-        ->from('user')
-        ->join('profile', 'user.user_profile_id = profile.profile_id')
-        ->order_by('user.user_id','desc');
-        if(array_key_exists("start",$params) && array_key_exists("limit",$params)){
-            $this->db->limit($params['limit'],$params['start']);
-        }elseif(!array_key_exists("start",$params) && array_key_exists("limit",$params)){
-            $this->db->limit($params['limit']);
-        }
-        $query = $this->db->get();
-
-       // echo $this->db->last_query();
-
-        return ($query->num_rows() > 0)? $query->result():FALSE;
-        
+            $this->db
+            ->select('user.*,profile.*')
+            ->from('user')
+            ->join('profile', 'user.user_profile_id = profile.profile_id')
+            ->order_by('user.user_id','desc');
+            if(array_key_exists("start",$params) && array_key_exists("limit",$params)){
+                $this->db->limit($params['limit'],$params['start']);
+            }elseif(!array_key_exists("start",$params) && array_key_exists("limit",$params)){
+                $this->db->limit($params['limit']);
+            }
+            $query = $this->db->get();
+            return ($query->num_rows() > 0)? $query->result():FALSE;
     }
 
 
@@ -64,7 +60,7 @@ class User_Model extends CI_Model{
     }
     
     
-    public function GetById($id = null) {
+    /*public function GetById($id = null) {
         return  R::findOne($this->tableName, 'id = ? ', array($id));
     }
      
@@ -78,17 +74,15 @@ class User_Model extends CI_Model{
     
     public  function  RecordCount(){
         return R::count( $this->tableName );
-    }
+    }*/
         
     public function Save($data='') {
-          print_r($data);
-          die;
-
         if ($data->user_id > 0) {
             $status=$this->UpdateRecord($data);
-       } else {
+        } else {
             $status=$this->AddRecord($data);
         }
+        return $status;
     }
 
 
@@ -96,13 +90,25 @@ class User_Model extends CI_Model{
         $this->db->trans_start();
         $this->db->insert($this->tableName, $info);
         $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+
     }
 
     private function UpdateRecord($info=array()){
         $this->db->trans_start();
         $this->db->update($this->tableName, $info);
         $this->db->trans_complete();
-
+        if ($this->db->trans_status() === FALSE)
+        {
+            return FALSE;
+        }else{
+            return TRUE;
+        }
     }
 
     
