@@ -1,37 +1,15 @@
-
 <script type="text/javascript">
-
-$(document).ready(function(){
-	
-	
+/*$(document).ready(function(){
 	$('#nombre, #email').on('input',function(e){
-
 	      if( !$(this).val()==""){
-                 
 	      }
-		
-	     
     });
-	
-
-});
-
-
+});*/
 </script>
-
-
-
 <?php 
-
-
 $err="";
 $data="";
-
 ?>
-
-
-
-
     <div class="box-body table-responsive no-padding">
             <div class="clearfix"></div>
             <div class="col-lg-12" style="padding-top: 15px">
@@ -109,8 +87,8 @@ $data="";
                 <div class="Perfil col-lg-10 form-group">
                     <select class="form-control" id="perfil" name="perfil">
                         <option value=""  >Seleccione</option>
-                        <?php foreach ($perfiles as $perfil):?>
-                            <option value="<?php echo $perfil->id?>"  <?php  //echo   $perfil->id==$data['perfil'] ? 'selected' :  ''    ?> ><?php echo $perfil->descripcion?></option>
+                        <?php foreach ($profiles as $profile):?>
+                            <option value="<?php echo $profile->profile_id?>"  <?php  //echo   $perfil->id==$data['perfil'] ? 'selected' :  ''    ?> ><?php echo $profile->profile_name?></option>
                         <?php endforeach;?>
                     </select>
                     <div class="clearfix"></div>

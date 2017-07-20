@@ -1,4 +1,16 @@
+<?php 
+	/*echo "<pre>";
+	print_r($lists);
 
+	echo $lists->Rows;
+	
+	foreach($lists->Data as $ls) :
+     echo $ls->user_id;
+
+	endforeach;
+die();*/
+
+?>
 
 <!-- Default box -->
 <div class="box box-primary">
@@ -20,13 +32,9 @@
         <div class="col-lg-12"><div id="msg-error"  class="alert alert-success alert-dismissible error"></div></div>
         
         
-        <div class="box-tools"
-			style="padding-bottom: 100px; padding-right: 10px">
-        <?php echo $links; ?>
-            
+        <div class="box-tools"style="padding-bottom: 100px; padding-right: 10px">
+        		<?php echo $lists->ShowLinks('pagination pagination-sm no-margin pull-right'); ?>
         </div>
-
-
 
 		<table class="table table-hover">
 			<tbody>
@@ -39,14 +47,17 @@
 					<th width="15%">Accion</th>
 
 				</tr>
-            <?php foreach ($listado as $lista):?>  
+            <?php 
+			   if (is_array($lists->Data)):
+				foreach ($lists->Data as $list):
+			?>  
             <tr>
-					<td><?php echo $lista->id?></td>
-					<td><?php echo $lista->nombre?></td>
-					<td><?php echo $lista->email?></td>
-					<td><?php echo $lista->descripcion ?></td>
+					<td><?php echo $list->user_id?></td>
+					<td><?php echo $list->user_first_name ?> <?php echo $list->user_last_name ?></td>
+					<td><?php echo $list->user_email?></td>
+					<td><?php echo $list->profile_name ?></td>
 					<td>
-                   <?php if($lista->estado==1):?>
+                   <?php if($list->user_status==1):?>
                 	<span class="label label-success">Activo</span>
                    <?php else : ?>
                     <span class="label label-danger">Inctivo</span>
@@ -54,31 +65,36 @@
                 </td>
 					<td align="center">
 						<div class="btn-group ">
-							 <a	href="javascript:ShowViewFormUser(<?php echo $lista->id?>)"	class="btn btn-info btn-flat" data-toggle="tooltip" title="Ver"><i class="ion ion-ios-eye"></i></a> 
-							 <a	 href="javascript:Activate(<?php echo $lista->id?>)" 	class="activar btn btn-info btn-flat" data-toggle="tooltip"	title="Activar/Desactivar"><i class="fa fa-check"></i></a>
-							 <a	 onclick="javascript:ShowEditFormUser(<?php echo $lista->id?>);"  href="javascript:;"	class="btn btn-info btn-flat" data-toggle="tooltip"	title="Editar"><i class="ion ion-compose"></i></a> 
-							 <a	href="javascript:ShowDeleteFormUser(<?php echo $lista->id?>)" class="btn btn-info btn-flat "	data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></a>
+							 <a	href="javascript:ShowViewFormUser(<?php echo $list->user_id ?>)"	class="btn btn-info btn-flat" data-toggle="tooltip" title="Ver"><i class="ion ion-ios-eye"></i></a> 
+							 <a	 href="javascript:Activate(<?php echo $list->user_id?>)" 	class="activar btn btn-info btn-flat" data-toggle="tooltip"	title="Activar/Desactivar"><i class="fa fa-check"></i></a>
+							 <a	 onclick="javascript:ShowEditFormUser(<?php echo $list->user_id?>);"  href="javascript:;"	class="btn btn-info btn-flat" data-toggle="tooltip"	title="Editar"><i class="ion ion-compose"></i></a> 
+							 <a	href="javascript:ShowDeleteFormUser(<?php echo $list->user_id ?>)" class="btn btn-info btn-flat "	data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></a>
 							&nbsp;
 						</div>
 					</td>
 
 				</tr>
-            <?php endforeach;?>
+            <?php 
+				endforeach;
+			   else :	
+			?>
+			   <tr>
+				   <td colspan="6"><div class="text-center" >NO HAY REGISTROS</div></td>
+			   </tr>
+			<?php
+				endif;
+			?>
 
             </tbody>
 		</table>
+
+
 	</div>
 	<!-- /.box-body -->
 	<div class="box-footer">
 		<div class="box-tools">
-        <?php echo $links; ?>
-            <!--  <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">«</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">»</a></li>
-            </ul>-->
+         <?php echo $lists->ShowLinks('pagination pagination-sm no-margin pull-right'); ?>
+             
 		</div>
 	</div>
 	<!-- /.box-footer-->

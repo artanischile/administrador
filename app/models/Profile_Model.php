@@ -1,8 +1,8 @@
 
 <?php
 if (! defined ( 'BASEPATH' ))   exit ( 'No direct script access allowed' );
-class Perfil_Model extends CI_Model {
-    public   $table = 'perfil';
+class Profile_Model extends CI_Model {
+    public   $table = 'profile';
     function __construct() {
         parent::__construct ();
     }
@@ -18,8 +18,12 @@ class Perfil_Model extends CI_Model {
         return $query->result ();
     }
 
-    function getPerfilesActivos(){
-        $this->db->select ( ' * ' )->from ( 'perfil' )->where('estado',1)->order_by ( "id", "desc" );
+    function getActiveProfiles(){
+        $this->db
+             ->select ( '*' )
+             ->from ( 'profile' )
+             ->where('profile_status',1)
+             ->order_by ( "profile_id", "desc" );
         $query = $this->db->get ();
         return $query->result ();
     }
