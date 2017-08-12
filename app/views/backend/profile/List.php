@@ -1,66 +1,56 @@
+<?php
+//echo "<pre>";
+//print_r($lists);
+?>
+
 <!-- Default box -->
 <div class="box box-primary">
-	<div class="box-header with-border">
-		<h3 class="box-title"><?php echo $titulo?></h3>
+<div class="box-header with-border">
+<h3 class="box-title"><?php echo $titulo?></h3>
 	</div>
 	<div class="box-body table-responsive no-padding">
 
 		<div class="col-lg-12">
-	
-			<button id="agregar_user" onclick="ShowAddFormUser();"  class="btn bg-navy btn-flat margin">
-					<i class="fa fa-plus-circle"></i>&nbsp;Agregar Nuevo Usuario
+			<button id="agregar_user" onclick="ShowAddProfile();"  class="btn bg-navy btn-flat margin">
+					<i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Agregar Perfil
 			</button>
 		</div>
 
-        <?php
-       
-            ?>
-        <div class="col-lg-12"><div id="msg-error"  class="alert alert-success alert-dismissible error"></div></div>
-        
-        
-        <div class="box-tools"style="padding-bottom: 100px; padding-right: 10px">
-        		<?php echo $lists->ShowLinks('pagination pagination-sm no-margin pull-right'); ?>
-        </div>
-
 		<table class="table table-hover">
-			<tbody>
+			<thead>
 				<tr>
 					<th width="5%">#</th>
-					<th width="20%">Usuario</th>
-					<th width="20%">E-Mail</th>
-					<th width="15%">Perfil</th>
+					<th width="35%">Descripcion</th>
+					<th width="10%">Creado En</th>
 					<th width="10%">Estado</th>
 					<th width="15%">Accion</th>
 
 				</tr>
-            <?php 
+			</thead>
+			<tbody>
+			<?php 
 			   if (is_array($lists->Data)):
-				foreach ($lists->Data as $list):
+				foreach ($lists->Data as $list): 
 			?>  
-            <tr>
-					<td><?php echo $list->user_id?></td>
-					<td><?php echo $list->user_first_name ?> <?php echo $list->user_last_name ?></td>
-					<td><?php echo $list->user_email?></td>
-					<td><?php echo $list->profile_name ?></td>
+				<tr>
+					<td><?php echo $list->profile_id?></td>
+					<td><?php echo $list->profile_name?></td>
+					<td><?php echo $list->profile_create_at?></td>
 					<td>
-                   <?php if($list->user_status==1):?>
-                	<span class="label label-success">Activo</span>
-                   <?php else : ?>
-                    <span class="label label-danger">Inctivo</span>
-                   <?php endif;?>	
-                </td>
-					<td align="center">
+						<?php if($list->profile_status==1):?>
+                			<span class="label label-success">Activo</span>
+                   		<?php else : ?>
+                    		<span class="label label-danger">Inctivo</span>
+                   		<?php endif;?></td>
+					<td>
 						<div class="btn-group ">
-							 <a	href="javascript:ShowViewFormUser(<?php echo $list->user_id ?>)"	class="btn btn-info btn-flat" data-toggle="tooltip" title="Ver"><i class="ion ion-ios-eye"></i></a> 
-							 <a	 href="javascript:Activate(<?php echo $list->user_id?>)" 	class="activar btn btn-info btn-flat" data-toggle="tooltip"	title="Activar/Desactivar"><i class="fa fa-check"></i></a>
-							 <a	 onclick="javascript:ShowEditFormUser(<?php echo $list->user_id?>);"  href="javascript:;"	class="btn btn-info btn-flat" data-toggle="tooltip"	title="Editar"><i class="ion ion-compose"></i></a> 
-							 <a	href="javascript:ShowDeleteFormUser(<?php echo $list->user_id ?>)" class="btn btn-info btn-flat "	data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></a>
-							&nbsp;
+							 <a	 href="javascript:;" onclick="javascript:ShowEditProfile(<?php echo $list->profile_id?>);"  	class="btn btn-info btn-flat" data-toggle="tooltip"	title="Editar"><i class="ion ion-compose"></i></a>
+							 <a	href="javascript:ShowDeleteProfile(<?php echo $list->profile_id ?>)" class="btn btn-info btn-flat "	data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></a> 
 						</div>
 					</td>
-
+					
 				</tr>
-            <?php 
+			<?php 
 				endforeach;
 			   else :	
 			?>
@@ -71,21 +61,27 @@
 				endif;
 			?>
 
+
             </tbody>
 		</table>
-
-
 	</div>
 	<!-- /.box-body -->
 	<div class="box-footer">
 		<div class="box-tools">
-         <?php echo $lists->ShowLinks('pagination pagination-sm no-margin pull-right'); ?>
-             
+        
+             <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">«</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">»</a></li>
+            </ul>
 		</div>
 	</div>
 	<!-- /.box-footer-->
 </div>
-<!-- /.box -->
+<!-- /.box -->   
+
 <?php $attributes = array( 'id' => 'frmUser'); ?>
 
 <!-- COMPOSE MESSAGE MODAL VER -->

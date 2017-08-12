@@ -9,23 +9,22 @@ $(document).ready(function(){
 });
 
 
-function ShowAddFormUser() {
-	 $("#ttt").html("Creacion de Usuario");
+function ShowAddProfile() {
+ 	$("#ttt").html("Creacion de Perfil");
 	$("#enviar").show();
-		$('.modal-body').load(base_url+'bo/user/add', function(result) {
+		$('.modal-body').load(base_url+'bo/profile/Add', function(result) {
 			$('#mymodal').modal({
 				show : true, 
 				backdrop : 'static'
 
 			});
 		});
-
 }
 
 
 function ShowEditFormUser(id){
 	 $("#ttt").html("Edicion de Usuario");
-	$('.modal-body').load(base_url+'bo/user/edit/' + id,
+	$('.modal-body').load(base_url+'bo/profile/edit/' + id,
 			function(result) {
 				$('#mymodal').modal({
 					show : true,
@@ -39,7 +38,7 @@ function ShowEditFormUser(id){
 
 function ShowViewFormUser(id){
    $("#tt").html("Informacion de Usuario");
-	$('.modal-body').load(base_url+'bo/user/view/' + id,
+	$('.modal-body').load(base_url+'bo/profile/view/' + id,
 			function(result) {
 				$('#mymodal2').modal({
 					show : true,
@@ -54,7 +53,7 @@ function ShowViewFormUser(id){
 
 function ShowDeleteFormUser(id){
 	 $("#ttt").html("Eliminacion de Usuario");
-	$('.modal-body').load(base_url+'bo/user/delete/' + id,
+	$('.modal-body').load(base_url+'bo/profile/delete/' + id,
 			function(result) {
 				$('#mymodal').modal({
 					show : true,
@@ -78,7 +77,7 @@ function ShowDeleteFormUser(id){
 function Activate(id){
    	$.ajax({
 		type : "POST",
-		url : '/administrador/bo/user/activate/'+id,
+		url : '/administrador/bo/profile/activate/'+id,
 		data : $("#frmUser").serialize(),
 		dataType : "json",
 		success : function(data) {
@@ -99,7 +98,7 @@ function Validarform() {
    
 	$.ajax({
 		type : "POST",
-		url : '/administrador/bo/user/save',
+		url : '/administrador/bo/profile/save',
 		data : $("#frmUser").serialize(),
 		dataType : "json",
 		success : function(data) {

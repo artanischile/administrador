@@ -57,23 +57,22 @@ class User extends CI_Controller
         $this->data['subtitulo_pagina'] = "permite agregar un nuevo usuario";
         $this->data['titulo'] = "Agregar Nuevo Usuario";
         $this->data['profiles'] = $this->profile->getActiveProfiles();
-      //  $this->data['content'] = 'backend/usuarios/agregar';
         $this->load->view('backend/user/Add', $this->data);
     }
     
 
-    function Edit($id = null)
+    function Edit($uid = null)
     {
         $this->data['titulo_pagina'] = "Administracion Usuarios";
         $this->data['subtitulo_pagina'] = "permite editar un usuario existente";
         $this->data['titulo'] = "Editar  Usuario";
         $this->data['perfiles'] = $this->profile->getActiveProfiles();
-        $this->data['usuario'] = $this->user->GetById($id);
-        $this->data['content'] = 'backend/usuarios/editar';
+        $this->data['usuario'] = $this->user->ById($uid);
+        $this->data['content'] = 'backend/usuarios/edit';
         $this->load->view('backend/user/Edit', $this->data);
     }
 
-    function Delete($id)
+    function Delete($uid)
     {
         
         $this->data['titulo_pagina'] = "Administracion Usuarios";
@@ -83,6 +82,38 @@ class User extends CI_Controller
         $this->load->view('backend/user/Delete', $this->data);
         
     }
+
+
+    function View($uid){
+       $this->data['titulo_pagina'] = "Administracion Usuarios";
+       $this->data['subtitulo_pagina'] = "permite ver información de un usuario";
+       $this->data['titulo'] = "Ver información de usuario";
+       $this->data['usuario'] = $this->user->ById($uid);
+       $this->load->view('backend/user/View', $this->data);
+    }
+
+
+    public function Activate($uid)
+    {  
+        if ($this->user->Activate($uid)) {
+            $data = array(
+                "succes" => "OK",
+                "msg" => "Operacion realizada con exito"
+            );
+            echo json_encode($data);
+            exit();
+        } else {
+            $data = array(
+                "succes" => "error",
+                "msg" => "Operacion fallida"
+            );
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+
+
 
     function Save()
     {
@@ -113,17 +144,17 @@ class User extends CI_Controller
                 echo json_encode($err_data);
                 exit();
             } else {
-                // print_r($this->input->post());
+                
                 $this->data=array();
-                $this->data['user_id'] = $this->input->post('id_usuario', true);
-                $this->data['user_first_name'] = $this->input->post('nombre', true);
-                $this->data['user_last_name'] = '';
-                $this->data['user_name'] = $this->input->post('usuario', true);
-                $this->data['user_password'] = $this->enc->encode($this->input->post('password', true));
-                $this->data['user_email'] = $this->input->post('email', true);
-                $this->data['user_profile_id'] = $this->input->post('perfil', true);
-                $this->data['user_status'] = $this->input->post('estado', true);
-                $this->data['user_created'] = date('Y-m-d H:i:s');
+                $this->data['user_id']          = $this->input->post('id_usuario', true);
+                $this->data['user_first_name']  = $this->input->post('nombre', true);
+                $this->data['user_last_name']   = '';
+                $this->data['user_name']        = $this->input->post('usuario', true);
+                $this->data['user_password']    = $this->enc->encode($this->input->post('password', true));
+                $this->data['user_email']       = $this->input->post('email', true);
+                $this->data['user_profile_id']  = $this->input->post('perfil', true);
+                $this->data['user_status']      = $this->input->post('estado', true);
+                $this->data['user_created']     = date('Y-m-d H:i:s');
                 if ($this->user->Save((object) $this->data)) {
                        $data = array(
                             "succes" => "OK",
@@ -145,49 +176,4 @@ class User extends CI_Controller
         }
     }
 
-   function View($id){
-       
-       $this->data['titulo_pagina'] = "Administracion Usuarios";
-       $this->data['subtitulo_pagina'] = "permite editar un usuario existente";
-       $this->data['titulo'] = "Editar  Usuario";
-         $this->data['usuario'] = $this->user->Ver($id);
-        $this->load->view('backend/user/View', $this->data);
-       
-       
-   }
-
-    public function Activate($id)
-    {  
-        
-        
-      
-        if ($this->user->Activate($id)) {
-            $data = array(
-                            "succes" => "OK",
-                            "msg" => "Operacion realizada con exito"
-                        );
-                        echo json_encode($data);
-                        exit();
-        } else {
-            
-            $data = array(
-                            "succes" => "error",
-                            "msg" => "Operacion fallida"
-                        );
-                        echo json_encode($data);
-                        exit();
-        }
-     
-       
-    }
-
-    function Profile($id = null)
-    {
-        $this->data['titulo_pagina'] = "Administracion Usuarios";
-        $this->data['subtitulo_pagina'] = "agrega, modifica, elimina , activa o desactiva usuarios";
-        $this->data['titulo'] = "Listado de Usuarios";
-        
-        $this->data['content'] = 'backend/usuarios/perfil';
-        $this->load->view('backend/layout/layout', $this->data);
-    }
 }

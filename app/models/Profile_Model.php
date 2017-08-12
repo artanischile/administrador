@@ -6,17 +6,22 @@ class Profile_Model extends CI_Model {
     function __construct() {
         parent::__construct ();
     }
-    function getPerfiles() {
-        $this->db->select ( '   perfil.perfil_id,
-                                perfil.perfil_descripcion,
-                                perfil.perfil_estado,
-                                perfil.perfil_creacion,
-                                perfil.perfil_admin ' )
-                ->from ( 'perfil' )
-                ->order_by ( "perfil.perfil_id", "desc" );
-        $query = $this->db->get ();
-        return $query->result ();
+
+     public function GetAll($params = array()){
+            $this->db
+            ->select('profile.*')
+            ->from('profile')
+            ->order_by('profile.profile_id','desc');
+            if(array_key_exists("start",$params) && array_key_exists("limit",$params)){
+                $this->db->limit($params['limit'],$params['start']);
+            }elseif(!array_key_exists("start",$params) && array_key_exists("limit",$params)){
+                $this->db->limit($params['limit']);
+            }
+            $query = $this->db->get();
+            return ($query->num_rows() > 0)? $query->result():FALSE;
     }
+
+
 
     function getActiveProfiles(){
         $this->db
@@ -29,12 +34,8 @@ class Profile_Model extends CI_Model {
     }
 
 
-    function getPerfilById($id) {
-        if (is_numeric($id)){
-            $this->db->select ( ' * ' )->from ( 'perfil' )->where('perfil_id',$id)->order_by ( "perfil_id", "desc" );
-            $query = $this->db->get ();
-            return $query->result ();
-        }else{}
+    function ById($id) {
+      
 
     }
 

@@ -10,12 +10,12 @@ class Banner extends  CI_Controller{
 
         parent::__construct();
 
-        if( !$this->session->userdata('userlogued') ){
+        /*if( !$this->session->userdata('userlogued') ){
              redirect(base_url('bo/login'),'refresh');
-        }
+        }*/
         
 		
-        $this->load->model('Perfil_Model','perfil');
+        //$this->load->model('Perfil_Model','perfil');
         $this->load->model('banners_Model','banners');
         
         $this->data['uri']=$this->uri->segment_array();
@@ -36,7 +36,7 @@ class Banner extends  CI_Controller{
            // BASE_THEME.'plugins/kartik/themes/explorer/theme.js',
             BASE_THEME.'plugins/datepicker/bootstrap-datepicker.js',
             BASE_THEME . 'plugins/bootstrap-filestyle-1.2.1/src/bootstrap-filestyle.min.js',
-             BASE_JS_BO.'ajaxfileupload.js',
+            BASE_JS_BO.'ajaxfileupload.js',
             
         ));
          
