@@ -12,7 +12,7 @@
 
 		<div class="col-lg-12">
 			<button id="agregar_user" onclick="ShowAddProfile();"  class="btn bg-navy btn-flat margin">
-					<i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Agregar Perfil
+					<i class="ion ion-plus-circled"></i>&nbsp;&nbsp;Agregar Perfil
 			</button>
 		</div>
 
@@ -44,8 +44,8 @@
                    		<?php endif;?></td>
 					<td>
 						<div class="btn-group ">
-							 <a	 href="javascript:;" onclick="javascript:ShowEditProfile(<?php echo $list->profile_id?>);"  	class="btn btn-info btn-flat" data-toggle="tooltip"	title="Editar"><i class="ion ion-compose"></i></a>
-							 <a	href="javascript:ShowDeleteProfile(<?php echo $list->profile_id ?>)" class="btn btn-info btn-flat "	data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></a> 
+						fa-plus-circle	 <a	 href="javascript:ShowEditProfile(<?php echo $list->profile_id?>);"     data-toggle="tooltip"	title="Editar"><i class="green bigger-150 ion ion-compose" ></i></a>
+							 <a	 href="javascript:ShowDeleteProfile(<?php echo $list->profile_id ?>)"   data-toggle="tooltip"   title="Eliminar"><i class="red bigger-150 fa fa-trash" ></i></a> 
 						</div>
 					</td>
 					
@@ -82,10 +82,10 @@
 </div>
 <!-- /.box -->   
 
-<?php $attributes = array( 'id' => 'frmUser'); ?>
+<?php $attributes = array( 'id' => 'frmProfile'); ?>
 
 <!-- COMPOSE MESSAGE MODAL VER -->
-<div class="modal fade" id="mymodal" tabindex="-1" role="dialog"
+<div class="modal fade" id="Profile" tabindex="-1" role="dialog"
 	aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -118,33 +118,3 @@
 
 
 
-<!-- COMPOSE MESSAGE MODAL VER -->
-<div class="modal fade" id="mymodal2" tabindex="-1" role="dialog"
-	aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
-				<h4 class="modal-title">
-					<i class="fa fa-users blue"></i> <span id="tt">Mantencion Usuarios</span></h4>
-			</div>
-			<?php echo form_open('',$attributes);?>
-			
-				<div class="modal-body"></div>
-				<div class="modal-footer clearfix">
-					<button type="button" id="cancelar" class="btn btn-danger"
-						data-dismiss="modal">
-						<i class="fa fa-times"></i> Cancelar
-					</button>
-					
-
-				</div>
-			<?php echo form_close(); ?>	
-			
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

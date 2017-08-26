@@ -17,7 +17,8 @@
                         maxlength="35"
                         value="<?php echo isset($data['profile_name'])? $data['profile_name'] : '' ?>" />
                         <div class="clearfix"></div>
-                        
+                        <div class="col-lg-8 col-lg-offset-2 ms-error eProfileName  text-danger"></div>
+                        <div class="clearfix"></div>
         </div>
 
         <div class="col-lg-2"><label >Estado</label></div>
@@ -27,6 +28,8 @@
                         <option value="1" >Activo</option>
                         <option value="2" >Inactivo</option>
                     </select>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-8 col-lg-offset-2 ms-error eProfileStatus  text-danger"></div>
                     <div class="clearfix"></div>
                     
         </div>

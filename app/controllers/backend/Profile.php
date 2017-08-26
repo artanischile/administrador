@@ -12,7 +12,7 @@ class Profile extends  CI_Controller{
         $this->load->library('Paginacion','paginar');
         $this->data['uri'] = $this->uri->segment_array();
         add_js(array(
-            BASE_JS_BO.'perfil.js'
+            BASE_JS_BO.'profile.js'
         ));
     }
 
@@ -55,11 +55,7 @@ class Profile extends  CI_Controller{
             if($this->input->is_ajax_request()){
                 $this->form_validation->set_rules('profile_name', 'Descripcion', 'required|xss_clean');
                 $this->form_validation->set_rules('profile_name', 'Descripcion', 'required|xss_clean');
-            
-
-            
-            
-            
+                    print_r($this->input->post());
             }
          }
 

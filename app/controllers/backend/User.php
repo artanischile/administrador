@@ -34,13 +34,13 @@ class User extends CI_Controller
     function ShowList ($page=1){
         $RecordCount = count($this->user->GetAll());
         $this->paginacion->Rows = 2;
-        $offset = isset($page) ? ($page-1) * $this->paginacion->Rows : 0;
         $this->paginacion->TotalRecords = $RecordCount;
         $this->paginacion->Page = $page;
-        $this->paginacion->SetData($this->user->GetAll(array(
-            'limit' => $this->paginacion->Rows,
-            'start' => $offset
-        )));
+        $this->paginacion->SetData
+            ($this->user->GetAll(array(
+                'limit' => $this->paginacion->Rows,
+                'start' => $offset
+            )));
         $this->paginacion->Uri = BASE_URL . "bo/user/showlist";
         $this->data['lists']=$this->paginacion;
         $this->data['titulo_pagina'] = "Administracion Usuarios";

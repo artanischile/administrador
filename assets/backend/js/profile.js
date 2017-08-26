@@ -13,7 +13,7 @@ function ShowAddProfile() {
  	$("#ttt").html("Creacion de Perfil");
 	$("#enviar").show();
 		$('.modal-body').load(base_url+'bo/profile/Add', function(result) {
-			$('#mymodal').modal({
+			$('#Profile').modal({
 				show : true, 
 				backdrop : 'static'
 
@@ -22,7 +22,7 @@ function ShowAddProfile() {
 }
 
 
-function ShowEditFormUser(id){
+function ShowEditProfile(id){
 	 $("#ttt").html("Edicion de Usuario");
 	$('.modal-body').load(base_url+'bo/profile/edit/' + id,
 			function(result) {
@@ -51,7 +51,7 @@ function ShowViewFormUser(id){
 	
 }
 
-function ShowDeleteFormUser(id){
+function ShowDeleteProfile(id){
 	 $("#ttt").html("Eliminacion de Usuario");
 	$('.modal-body').load(base_url+'bo/profile/delete/' + id,
 			function(result) {
@@ -89,56 +89,32 @@ function Activate(id){
 			}
 		}
 	})
-    
 }    
     
     
 
 function Validarform() {
-   
+   alert('holas que tal');
 	$.ajax({
 		type : "POST",
 		url : '/administrador/bo/profile/save',
-		data : $("#frmUser").serialize(),
+		data : $("#frmProfile").serialize(),
 		dataType : "json",
 		success : function(data) {
 			if (data['succes'] == "error") {
 				
-				if (data['nombre'] != "") {
+				if (data['profile_name'] != "") {
 					$('.Nombre').addClass('has-error');
-					$(".eNombre").html(data['nombre']).fadeIn();
+					$(".eProfileName").html(data['nombre']).fadeIn();
 					
 				}
 				
-				if (data['email'] != "") {
-					$('.Email').addClass('has-error');
-					$(".eEmail").html(data['email']).fadeIn();
-					
-				}
-				
-				if (data['usuario'] != "") {
-					$('.Usuario').addClass('has-error');
-					$(".eUsuario").html(data['usuario']).fadeIn();
-					
-				}
-				
-				if (data['password'] != "") {
-					$('.Password').addClass('has-error');
-					$(".ePassword").html(data['password']).fadeIn();
-					
-				}
-				
-				if (data['perfil'] != "") {
-					$('.Perfil').addClass('has-error');
-					$(".ePerfil").html(data['perfil']).fadeIn();
-					
-				}
-				
-				if (data['estado'] != "") {
+				if (data['profile_status'] != "") {
 					$('.Estado').addClass('has-error');
-					$(".eEstado").html(data['estado']).fadeIn();
+					$(".eProfileStatus").html(data['email']).fadeIn();
 					
 				}
+			
 			}
 			if (data['succes'] == "OK") {
 				$('#mymodal').modal('hide');
