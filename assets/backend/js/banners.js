@@ -10,13 +10,19 @@ $(document).ready(function(){
 	$('#frmBanners').submit(function(e) {
 		e.preventDefault();
 		$.ajaxFileUpload({
-			url 			:base_url+'bo/upload/do_upload', 
+			url 			:base_url+'bo/banner/save', 
 			secureuri		:false,
 			fileElementId	:'archivo',
 			dataType		: 'json',
 			data			: {
-				'csrf_token':$('input[name=csrf_token]').val(),
-                'descripcion':$('input[name=descripcion]').val(),
+				'csrf_token'	:$('input[name=csrf_token]').val(),
+				'descripcion'	:$('input[name=descripcion]').val(),
+				'frase'			:$('input[name=frase]').val(),
+				'frase2'		:$('input[name=frase2]').val(),
+				'url'			:$('input[name=url]').val(),
+				'target'		:$('input[name=target]').val(),
+				
+				
 			},
 			success	: function (data, status)
 			{

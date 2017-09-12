@@ -78,7 +78,7 @@ class Banner extends  CI_Controller{
     
     
     function Save(){
-        
+    print_r($_POST)  ; 
         
      
         

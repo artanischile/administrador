@@ -8,12 +8,10 @@ jQuery.extend({
 			if(window.ActiveXObject)
 			{
         if(typeof uri== 'boolean'){
-iframeHtml += ' src="' + 'javascript:false' + '"';
-
+          iframeHtml += ' src="' + 'javascript:false' + '"';
         }
         else if(typeof uri== 'string'){
-iframeHtml += ' src="' + uri + '"';
-
+          iframeHtml += ' src="' + uri + '"';
         }	
 			}
 			iframeHtml += ' />';
@@ -74,13 +72,13 @@ iframeHtml += ' src="' + uri + '"';
 			{				
 				if(io.contentWindow)
 				{
- xml.responseText = io.contentWindow.document.body?io.contentWindow.document.body.innerHTML:null;
-        	 xml.responseXML = io.contentWindow.document.XMLDocument?io.contentWindow.document.XMLDocument:io.contentWindow.document;
+            xml.responseText = io.contentWindow.document.body?io.contentWindow.document.body.innerHTML:null;
+        	  xml.responseXML = io.contentWindow.document.XMLDocument?io.contentWindow.document.XMLDocument:io.contentWindow.document;
 
 				}else if(io.contentDocument)
 				{
- xml.responseText = io.contentDocument.document.body?io.contentDocument.document.body.innerHTML:null;
-        	xml.responseXML = io.contentDocument.document.XMLDocument?io.contentDocument.document.XMLDocument:io.contentDocument.document;
+            xml.responseText = io.contentDocument.document.body?io.contentDocument.document.body.innerHTML:null;
+        	  xml.responseXML = io.contentDocument.document.XMLDocument?io.contentDocument.document.XMLDocument:io.contentDocument.document;
 				}	
       }catch(e)
 			{
@@ -94,7 +92,7 @@ iframeHtml += ' src="' + uri + '"';
           status = isTimeout != "timeout" ? "success" : "error";
           // Make sure that the request was successful or notmodified
           if ( status != "error" )
-{
+          {
             // process the data (runs the xml through httpData regardless of callback)
             var data = jQuery.uploadHttpData( xml, s.dataType );  
             // If a local callback was specified, fire it and pass it the data
